@@ -29,7 +29,7 @@ modifActivite($_GET['id'],$nomActivite);
     <title>Document</title>
 </head>
 <body>
-    <h1>Liste de livres disponibles</h1>
+ 
     <form method="POST" action="">
     <table>
        
