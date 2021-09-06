@@ -1,14 +1,24 @@
 <?php
 session_start();
+require_once "config.php";
 // fonction qui va permettre la connexion à la base 
-function conexionBase(){
-    try {
-        $connexionBase = new PDO('mysql:host=localhost;dbname=journeesportive','sportive','123');
-    } catch (PDOException $e){
-        print nl2br("Error");
+
+    function conexionBase(){
+        static $mydb=null;
+        try{
+        if($mydb===null){
+            $connectionString='mysql:host='.DB_HOST.';dbname='.DB_NAME;
+            $mydb=new PDO($connectionString,DB_USER,DB_MDP);
+            $mydb->setAttribute(PDO :: ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            
+     
+        }
     }
-    return $connexionBase;
-}
+        catch (PDOException $e){
+            die("Error :".$e-> getMessage());
+        }
+        return $mydb;
+    }
 function getActivites(){
     try{
         $cnxBase = conexionBase();
@@ -117,4 +127,36 @@ function supClasse($idClasse){
     }
 return $reponseSQL;
 }
+function insererEleve($nomEleve,$prenomEleve,$nomClasse,$choix1,$choix2,$choix3){
+        $cnxBase = conexionBase();
+        $query=$cnxBase->prepare("INSERT INTO `journeesportive`.`eleve` (`eleve`.`nom`,`eleve`.`prenom`,`idClasse`) values (?,?,(Select `classe`.`idClasse` From `journeesportive`.`classe` where `classe`.`nomClasse`= ?));");
+        $query->execute([$nomEleve,$prenomEleve,$nomClasse]);
+
+        $lastid=$cnxBase->lastInsertId();
+        // for($i = 1; $i<= 3; $i++)
+        // {
+        //     $query=$cnxBase->prepare("INSERT INTO `journeesportive`.`inscrire` (`inscrire`.`ordrePref`,`inscrire`.`idActivite`,`inscrire`.`idEleve`) values (?,?,(Select `activite`.`idActivite` From `journeesportive`.`activite` where `activite`.`nomActivite`= ?));");
+
+        //     $query->execute([$i,$listechoix[$i-1],$lastid]);
+        // }
+        $query=$cnxBase->prepare("INSERT INTO `journeesportive`.`inscrire` (`inscrire`.`ordrePref`,`inscrire`.`idActivite`,`inscrire`.`idEleve`) values (?,(Select `activite`.`idActivite` From `journeesportive`.`activite` where `activite`.`nomActivite`= ?),?);");
+
+        for($i=0;$i<=3;$i++){
+
+            if($i==0){
+
+                $query->execute([1,$choix1,$lastid]);
+            }
+            if($i==1){
+
+                $query->execute([2,$choix2,$lastid]);
+            }
+            if($i==2){
+
+                $query->execute([3,$choix3,$lastid]);
+            }
+        }
+
+        
+    }
 ?>

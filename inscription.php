@@ -9,15 +9,18 @@ $classe=filter_input(INPUT_POST,('Classe'));
 $premierChoix=filter_input(INPUT_POST,('premierChoix'));
 $deuxiemeChoix=filter_input(INPUT_POST,('deuxiemeChoix'));
 $troisiemeChoix=filter_input(INPUT_POST,('troisiemeChoix'));
-//echo ("nom ".$nom."<br>"."prenom ".$prenom."<br>"."Classe ".$classe."<br>"."Premier Choix ".$premierChoix."<br>"."Deuxieme choix ".$deuxiemeChoix."<br>"."troisieme choix ".$troisiemeChoix."<br>");
+echo ("nom ".$nom."<br>"."prenom ".$prenom."<br>"."Classe ".$classe."<br>"."Premier Choix ".$premierChoix."<br>"."Deuxieme choix ".$deuxiemeChoix."<br>"."troisieme choix ".$troisiemeChoix."<br>");
 // $getActivite=getActivites();
 // foreach($getActivite as $getActivite){
 //     echo "$getActivite[0] ";
 //     echo "$getActivite[1]<br>";
 // }
 var_dump(getActivites2());
-;
-// foreach ($getActivite as $getActivite){
+if(filter_has_var(INPUT_POST,'confirmer')){
+insererEleve($nom,$prenom,$classe,$premierChoix,$deuxiemeChoix,$troisiemeChoix);
+}
+
+// foreach ($getAcivite as $getActivite){
 //     echo "$getActivite[0] ";
 //     echo "$getActivite[1]<br> ";
     
@@ -66,19 +69,19 @@ var_dump(getActivites2());
                 <tr><td><hr></td><td><hr></td></tr>
                 <tr>
                 <td>
-                   <?php AfficherSelectActivites("Choix 1",getActivites2())?>
+                   <?php AfficherSelectActivites("premierChoix",getActivites2())?>
                    </td>
                 
                 
                 </tr>
                 <tr>
                 <td>
-                   <?php AfficherSelectActivites("Choix 2",getActivites2())?>
+                   <?php AfficherSelectActivites("deuxiemeChoix",getActivites2())?>
                    </td>
                 </tr>
                 <tr>
                 <td>
-                   <?php AfficherSelectActivites("Choix 3",getActivites2())?>
+                   <?php AfficherSelectActivites("troisiemeChoix",getActivites2())?>
                    </td>
                 </tr>
                 <tr>           

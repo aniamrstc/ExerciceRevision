@@ -36,7 +36,7 @@ modifActivite($_GET['id'],$nomActivite);
         <tr>
         <td>Nom activité</td>
             <td><input type="text" name="nomActivite" ></td>
-            <
+            
             
             <td><input type="submit" name="env" value="Envoyer"></td>
         </tr>
