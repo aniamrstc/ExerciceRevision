@@ -159,4 +159,27 @@ function insererEleve($nomEleve,$prenomEleve,$nomClasse,$choix1,$choix2,$choix3)
 
         
     }
+    function verifUtilisateur($nomLogin)
+{
+    $cnxBase = conexionBase();
+   
+    $sql = "SELECT mdp FROM utilisateur WHERE pseudo = '$nomLogin';";
+    
+    $requeteSQL = $cnxBase->query($sql);
+    
+    $reponseSQL = $requeteSQL->fetch();
+    return $reponseSQL;
+}
+
+function verifMotdePasse($mdpUtilisateur, $mdpBase)
+{
+    
+    if(hash('sha1',$mdpUtilisateur) == $mdpBase)
+    {
+        return true;
+    } else 
+    {
+        return false;
+    }
+}
 ?>

@@ -1,6 +1,10 @@
 <?php
 
 require 'fonctionBD.inc.php';
+// if(!isset($_SESSION["login"])){
+//     header("location: ./login.php");
+//     exit();
+// }
 $nvActivite = filter_input(INPUT_POST, "activites", FILTER_SANITIZE_STRING);
 $nvClasse = filter_input(INPUT_POST, "classe", FILTER_SANITIZE_STRING);
 $confirmerActivite=filter_input(INPUT_POST,"confirmerActivite");
@@ -8,6 +12,7 @@ $confirmerClasse=filter_input(INPUT_POST,"confirmerClasse");
 if (!empty($nvActivite)) {
     setActivites($nvActivite);  
     echo "l'opperation a reussi";
+    header("location:./inscription.php");
     
 }
 else{

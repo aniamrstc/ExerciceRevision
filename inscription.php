@@ -3,6 +3,10 @@
 include "htmlToPhp.inc.php";
 require_once 'fonctionBD.inc.php';
 
+// if(!isset($_SESSION["login"])){
+//     header("location: ./login.php");
+//     exit();
+// }
 $nom=filter_input(INPUT_POST,('nom'));
 $prenom=filter_input(INPUT_POST,('prenom'));
 $classe=filter_input(INPUT_POST,('Classe'));
