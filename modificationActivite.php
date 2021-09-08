@@ -1,5 +1,9 @@
 <?php
 require_once 'fonctionBD.inc.php';
+if(!isset($_SESSION["login"])){
+    header("location: ./login.php");
+    exit();
+}
 if (isset($_GET['id']))
 {
     $activite=getActivites($_GET['id']);

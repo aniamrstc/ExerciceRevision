@@ -15,7 +15,9 @@ $mdpBase = verifUtilisateur($pseudo);
 
 if (verifMotdePasse($mdp, $mdpBase[0]))
 {
+$_SESSION["login"]=true;
  $_SESSION['message'] = "Bienvenue !";
+
  header("location: liste.php");
  
 } else 
@@ -44,6 +46,7 @@ echo "Erreur login";
             <p></p>
             <table>
                 <tr>
+                
                     <td>Nom d'utilisateur</td>
                     <td><input type="text" name="pseudo"></td>
                 </tr><tr>

@@ -1,6 +1,7 @@
 <?php
-session_start();
+
 require_once "config.php";
+session_start();
 // fonction qui va permettre la connexion à la base 
 
     function conexionBase(){
